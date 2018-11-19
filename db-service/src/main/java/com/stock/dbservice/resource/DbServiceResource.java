@@ -3,6 +3,7 @@ package com.stock.dbservice.resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.stock.dbservice.repository.QuotesRepository;
 @RequestMapping("/rest/db")
 public class DbServiceResource {
 
+	@Autowired
 	private QuotesRepository quotesRepository;
 
 	@GetMapping("/{username}")
@@ -27,7 +29,13 @@ public class DbServiceResource {
 
 	@PostMapping("/addQuote")
 	public List<String> addQuotes(@RequestBody final Quotes quotes) {
-		quotes.getQuotes().stream().map(quote -> new Quote(quotes.getUsername(), quote)).forEach(quote -> quotesRepository.save(quote));
+		//quotes.getQuotes().stream().map(quote -> new Quote(quotes.getUsername(), quote)).forEach(quote -> quotesRepository.save(quote));
+		
+		for(String quote : quotes.getQuotes()) {
+			Quote quoteNew = new Quote(quotes.getUsername(), quote); 
+			quotesRepository.save(quoteNew);
+		}
+		
 		return getQuoteByUserName(quotes.getUsername());
 	}
 

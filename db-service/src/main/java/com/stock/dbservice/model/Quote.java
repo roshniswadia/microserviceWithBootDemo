@@ -3,15 +3,16 @@ package com.stock.dbservice.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "quotes", catalog = "test")
+@Table(name = "quotes")
 public class Quote {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column
@@ -53,5 +54,9 @@ public class Quote {
 		this.quote = quote;
 	}
 	
-	
+	public Quote(int id,String userName, String quote) {
+		this.id = id;
+		this.userName = userName;
+		this.quote = quote;
+	}
 }
