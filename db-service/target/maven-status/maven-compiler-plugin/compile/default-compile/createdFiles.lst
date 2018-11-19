@@ -1,0 +1,5 @@
+com\stock\dbservice\resource\DbServiceResource.class
+com\stock\dbservice\model\Quote.class
+com\stock\dbservice\model\Quotes.class
+com\stock\dbservice\DbServiceApplication.class
+com\stock\dbservice\repository\QuotesRepository.class
